@@ -13,9 +13,12 @@ export class CalendarPageComponent {
     disabled: boolean;
     highlight: boolean;
   }[];
+  public currentMonth: number;
   constructor() {
+    let date = new Date(); //dia corriente
+    this.currentMonth = date.getMonth();
     this.monthDayBlocks = [];
-    this.days = [ 'Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fry', 'Sat'];
+    this.days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fry', 'Sat'];
     this.months = [
       'Januaty',
       'February',
@@ -30,12 +33,13 @@ export class CalendarPageComponent {
       'November',
       'December',
     ];
+    this.printCalendar(date);
   }
-  
-printCalendar(){
-  let date = new Date(); //dia corriente
-  let year = date.getFullYear(); // año corriente
-  let month = date.getMonth(); //mes corriente
+
+  printCalendar(date: Date) {
+    this.monthDayBlocks = [];
+    let year = date.getFullYear(); // año corriente
+    let month = date.getMonth(); //mes corriente
 
     // Primer dia del mes (lunes, martes....)
     let dayone = new Date(year, month, 1).getDay();
@@ -48,8 +52,6 @@ printCalendar(){
 
     // Ultima fecha del anterior mes (es 5 de marzo, el ultimo dia del mes pasado fue 28 de febrero)
     let monthlastdate = new Date(year, month, 0).getDate();
-
-
 
     // Añadimos las fechas del mes anterior
     for (let i = dayone; i > 0; i--) {
@@ -83,15 +85,20 @@ printCalendar(){
         highlight: false,
       });
     }
-}
-
-  nextMonth(month:number){
-
-
-
   }
 
-  prevMonth(month:number){
+  nextMonth() {
+    this.setMonth(this.currentMonth + 1);
+  }
 
+  prevMonth() {
+    this.setMonth(this.currentMonth - 1);
+  }
+
+  setMonth(month: number): void {
+    let date = new Date();
+    this.currentMonth = month;
+    date.setMonth(this.currentMonth);
+    this.printCalendar(date);
   }
 }

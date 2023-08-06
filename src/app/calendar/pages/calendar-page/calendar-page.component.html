@@ -1,8 +1,8 @@
 <div class="calendar-container">
   <header class="calendar-header">
-    <div id="calendar-prev"></div>
-    <p class="calendar-current-date">{{currentMonth}}</p>
-    <div id="calendar-next"></div>
+    <div id="calendar-prev" (click)="prevMonth()"></div>
+    <p class="calendar-current-date">{{months[currentMonth]}}</p>
+    <div id="calendar-next" (click)="nextMonth()"></div>
   </header>
 
   <div class="calendar-body">
