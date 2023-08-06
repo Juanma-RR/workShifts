@@ -1,0 +1,23 @@
+<div class="calendar-container">
+  <header class="calendar-header">
+    <div id="calendar-prev"></div>
+    <p class="calendar-current-date">{{currentMonth}}</p>
+    <div id="calendar-next"></div>
+  </header>
+
+  <div class="calendar-body">
+    <ul class="calendar-weekdays">
+      <li *ngFor="let day of days" class="weekday">
+        <div>{{ day }}</div>
+      </li>
+
+      <li
+        class="monthDate"
+        *ngFor="let dayBlock of monthDayBlocks"
+        [ngClass]="{ active: dayBlock.highlight, inactive: dayBlock.disabled }"
+      >
+        <div class="data-number">{{ dayBlock.value }}</div>
+      </li>
+    </ul>
+  </div>
+</div>

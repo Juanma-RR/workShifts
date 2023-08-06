@@ -1,0 +1,63 @@
+.container {
+  width: max-content;
+  height: 5rem;
+  display: grid;
+  place-items: space;
+  font-size: 45px;
+  color: darkblue;
+}
+
+.wellcome {
+  display: grid;
+  place-items: center;
+}
+
+.divprinc {
+  height: 30rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.calendar {
+  display: grid;
+  place-items: center;
+}
+
+.diary {
+  display: grid;
+  place-items: center;
+}
+
+.shifts {
+
+  display: grid;
+  place-items: center;
+  border-image: black;
+}
+
+.calendario_img {
+  border-radius: 30%;
+
+
+}
+
+.agenda_img {
+  border-radius: 30%;
+
+}
+
+.turnos_img {
+  border-radius: 30%;
+
+}
+
+img {
+  max-width: 300px;
+  width: 100%;
+}
+
+h2
+{
+  color: rgba(43, 43, 235, 0.76);
+}
