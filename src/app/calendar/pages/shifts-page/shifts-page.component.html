@@ -1,1 +1,52 @@
-<p>shifts-page works!</p>
+<form [formGroup]="allShifts" (ngSubmit)="onSubmit()">
+  <div class="form-container">
+    <label class="title">New Shift</label>
+    <!--agregar tareas-->
+    <div class="">
+      <label class="">Add</label>
+      <div class="">
+        <div class="input-group">
+          <input
+            class="add_newTime"
+            type="text"
+            placeholder="New shift"
+            [formControl]="newTime"
+          />
+
+          <input class="add_newColor"  type="color" [formControl]="newColor" />
+
+          <button (click)="addNewTimeAndColor()" type="button">
+            Add new shift
+          </button>
+          <span
+            *ngIf="this.newTime.invalid && this.newTime.touched"
+            class="error"
+            >May introduce a time
+          </span>
+          <br />
+          <span
+            *ngIf="this.newColor.invalid && this.newColor.touched"
+            class="error"
+            >May choose a color</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!--nuevas tareas-->
+
+    <div class="task-container" formArrayName="time">
+      <!--Mostrar la nueva tarea-->
+
+      <div class="time" *ngFor="let hour of time.controls; let i = index">
+        <input [value]="time.at(i).value" class="task-text" type="text" />
+
+        <!--Mostrar la fecha de la tarea-->
+
+        <input class="task-date" type="color" [value]="color.at(i).value" />
+        <button (click)="deleteSavedTime(i)">Delete</button>
+      </div>
+    </div>
+  </div>
+</form>
+

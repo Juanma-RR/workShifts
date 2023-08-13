@@ -1,1 +1,51 @@
-<p>diary-page works!</p>
+<form [formGroup]="allTasks" (ngSubmit)="onSubmit()">
+  <div class="form-container">
+    <label class="title">New Task</label>
+    <!--agregar tareas-->
+    <div class="">
+      <label class="">Add</label>
+      <div class="">
+        <div class="input-group">
+          <input
+            class="add_newTasks"
+            type="text"
+            placeholder="New Task"
+            [formControl]="newTask"
+          />
+
+          <input class="add_newDate" type="date" [formControl]="newDate" />
+
+          <button (click)="addNewTaskAndDate()" type="button">
+            Add new task
+          </button>
+          <span
+            *ngIf="this.newTask.invalid && this.newTask.touched"
+            class="error"
+            >May introduce a task
+          </span>
+          <br />
+          <span
+            *ngIf="this.newDate.invalid && this.newDate.touched"
+            class="error"
+            >May choose a date</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!--nuevas tareas-->
+
+    <div class="task-container" formArrayName="tasks">
+      <!--Mostrar la nueva tarea-->
+
+      <div class="task" *ngFor="let task of tasks.controls; let i = index">
+        <input [value]="tasks.at(i).value" class="task-text" type="text" />
+
+        <!--Mostrar la fecha de la tarea-->
+
+        <input class="task-date" type="date" [value]="dates.at(i).value" />
+        <button (click)="deleteSavedTask(i)">Delete</button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { isToday } from 'date-fns';
 
 @Component({
   selector: 'app-calendar-page',
@@ -14,13 +15,16 @@ export class CalendarPageComponent {
     highlight: boolean;
   }[];
   public currentMonth: number;
+  public currentYear: number;
+
   constructor() {
     let date = new Date(); //dia corriente
-    this.currentMonth = date.getMonth();
+    this.currentMonth = date.getMonth(); //mes corriente
+    this.currentYear = date.getFullYear(); //año corriente
     this.monthDayBlocks = [];
     this.days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fry', 'Sat'];
     this.months = [
-      'Januaty',
+      'January',
       'February',
       'March',
       'April',
@@ -87,18 +91,33 @@ export class CalendarPageComponent {
     }
   }
 
-  nextMonth() {
-    this.setMonth(this.currentMonth + 1);
+  nextMonth(): void {
+    if (this.currentMonth >= 11) {
+      this.setMonth(0);
+      this.setFullYear(this.currentYear + 1); //se puede hacer en un metodo junto con prevMonth.
+    } else {
+      this.setMonth(this.currentMonth + 1);
+    }
   }
 
-  prevMonth() {
-    this.setMonth(this.currentMonth - 1);
-  }
+  prevMonth(): void {
+    if (this.currentMonth <= 0) {
+      this.setMonth(11);
+      this.setFullYear(this.currentYear - 1);
+    } else {
+      this.setMonth(this.currentMonth - 1);
+    }  }
 
   setMonth(month: number): void {
-    let date = new Date();
-    this.currentMonth = month;
-    date.setMonth(this.currentMonth);
-    this.printCalendar(date);
+    let date = new Date(); //creamos una nueva fecha
+    this.currentMonth = month; // igualamos el mes corriente al mes dado por parámetro
+    date.setMonth(this.currentMonth); // asignamos el valor
+    this.printCalendar(date); // añadimos al array de días del mes.
+  }
+
+  setFullYear(year: number): void {
+    let date = new Date(); //creamos una nueva fecha,
+    this.currentYear = year; //igualamos el año corriente al año dado por parámetro
+    date.setFullYear(this.currentYear); //asignamos el valor
   }
 }

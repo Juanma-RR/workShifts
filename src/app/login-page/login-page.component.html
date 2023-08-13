@@ -1,1 +1,39 @@
-<p>login-page works!</p>
+<body>
+  <form [formGroup]="myForm">
+    <div class="input-container">
+      <input type="text" formControlName="user" (ngSubmit)="onSave()" />
+      <span class="error" *ngIf="isValidField('user')"
+        >{{ getFieldError("user") }}
+      </span>
+      <br />
+      <div class="password">
+        <input
+          id="pass"
+          type="password"
+          formControlName="password"
+          (ngSubmit)="onSave()"
+        />
+        <br />
+        <i
+          class="pi pi-eye"
+          id="icon"
+          (mousedown)="showPasswordAndIcon()"
+          (mouseup)="showPasswordAndIcon()"
+        ></i>
+
+        <br />
+      </div>
+
+      <span class="error" *ngIf="isValidField('password')"
+        >{{ getFieldError("password") }}
+      </span>
+
+      <br />
+      <button (click)="onSave()">Login</button>
+    </div>
+  </form>
+
+  <div class="acc">
+    <a routerLink="/register">Not account jet?</a>
+  </div>
+</body>

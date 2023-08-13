@@ -29,16 +29,9 @@ export class MenubarComponent implements OnInit{
         icon: 'pi pi-fw pi-book',
         routerLink: 'calendar/diary',
         items: [
+
           {
-            label: 'New',
-            icon: 'pi pi-fw pi-user-plus',
-          },
-          {
-            label: 'Delete',
-            icon: 'pi pi-fw pi-user-minus',
-          },
-          {
-            label: 'Search',
+            label: 'Search by date',
             icon: 'pi pi-fw pi-users',
           },
         ],
@@ -53,15 +46,14 @@ export class MenubarComponent implements OnInit{
     this.buttonItems =[
       {
         label: 'Login',
-        icon: 'pi pi-fw pi-user-plus',
+        icon: 'pi pi-fw pi-user',
         routerLink: 'login',
       },
       {
-        label: 'Logout',
-        icon: 'pi pi-fw pi-user-minus',
-        routerLink: 'logout',
+        label: 'Register',
+        icon: 'pi pi-fw pi-user-plus',
+        routerLink: 'register',
       },
-
     ]
   }
 }
