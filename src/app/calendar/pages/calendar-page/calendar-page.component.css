@@ -28,14 +28,14 @@
 }
 
 #calendar-prev:hover,
-#calendar-next:hover{
+#calendar-next:hover {
   cursor: pointer;
   box-shadow: -4px 4px 0 rgba(0, 0, 0, 1);
 }
 
-.calendar-current-date{
+.calendar-current-date {
   font-size: 45px;
-  font-style:italic;
+  font-style: italic;
   font-weight: bold;
 }
 .calendar-body {
@@ -54,7 +54,7 @@
   padding: 0 1em 0 1em;
 }
 
-.weekday  div {
+.weekday div {
   border: 2px solid #ff0b0b;
   border-radius: 5px 5px 0 0;
 }
@@ -78,26 +78,48 @@
   color: rgb(190, 190, 190);
   cursor: default;
   user-select: none;
-
 }
 .monthDate {
   position: relative;
   text-align: right;
   justify-content: right;
   border: 1px inset #e7e7e7;
-  cursor: pointer;
+  cursor: auto;
   height: 150px;
 }
 .data-number {
   position: absolute;
   bottom: 0.1em;
   right: 0.5em;
-
 }
 
 .calendar-dates > li {
   border: 1px solid #1e679a;
 }
 
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0.5em;
+  left: 0.5em;
+}
 
+.task{
+  font-size: 15px;
+  height: 100px;
+  overflow: auto; /* Agregar barra de desplazamiento si el contenido es muy largo */
+  color: black;
+}
 
+.expanded {
+  font-size: 15px;
+  height: 100px;
+  overflow: auto; /* Agregar barra de desplazamiento si el contenido es muy largo */
+  color: black;
+
+}

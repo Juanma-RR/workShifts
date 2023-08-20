@@ -1,14 +1,15 @@
 <body>
   <form [formGroup]="myForm">
-    <div class="input-container">
-      <input type="text" formControlName="user" (ngSubmit)="onSave()" />
+    <div class="form-container">
+      <input class="user-input" type="text" formControlName="user" (ngSubmit)="onSave()" />
       <span class="error" *ngIf="isValidField('user')"
         >{{ getFieldError("user") }}
       </span>
       <br />
-      <div class="password">
+      <div class="password-container">
         <input
           id="pass"
+          class="password-input"
           type="password"
           formControlName="password"
           (ngSubmit)="onSave()"

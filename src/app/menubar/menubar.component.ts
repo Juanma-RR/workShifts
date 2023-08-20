@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
-
-
 @Component({
   selector: 'app-menubar',
   templateUrl: './menubar.component.html',
-  styleUrls: ['./menubar.component.css']
+  styleUrls: ['./menubar.component.css'],
 })
-export class MenubarComponent implements OnInit{
+export class MenubarComponent implements OnInit {
   items: MenuItem[] | undefined;
-  buttonItems: MenuItem[]| undefined;
+  buttonItems: MenuItem[] | undefined;
 
   ngOnInit() {
     this.items = [
@@ -28,13 +26,6 @@ export class MenubarComponent implements OnInit{
         label: 'Diary',
         icon: 'pi pi-fw pi-book',
         routerLink: 'calendar/diary',
-        items: [
-
-          {
-            label: 'Search by date',
-            icon: 'pi pi-fw pi-users',
-          },
-        ],
       },
       {
         label: 'Shifts',
@@ -43,7 +34,7 @@ export class MenubarComponent implements OnInit{
       },
     ];
 
-    this.buttonItems =[
+    this.buttonItems = [
       {
         label: 'Login',
         icon: 'pi pi-fw pi-user',
@@ -54,9 +45,6 @@ export class MenubarComponent implements OnInit{
         icon: 'pi pi-fw pi-user-plus',
         routerLink: 'register',
       },
-    ]
+    ];
   }
 }
-
-
-

@@ -1,53 +1,74 @@
 body {
-  height: 100%;
+  align-items: center;
   display: flex;
   flex-direction: column;
+  height: 100%;
   justify-content: center;
-  align-items: center;
   margin-top: 13em;
 }
 
-input{
+.form-container {
+  align-items: center;
+  background: linear-gradient(#2d7dd2, #9000b3, #eac435, #8cffda, #f5cce8);
+  border-radius: 15px;
+  border-radius: 5px;
+  box-shadow: -2px 2px 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  height: 20em;
+  justify-content: center;
+  padding: 1em;
+  width: 18em;
+}
+
+.user-input {
+  background-color: #fff;
+  border-radius: 10px;
+  border:0;
+  color: black;
   height: 2em;
+  padding-left: 0.5em;
   width: 12em;
 }
 
-.input-container {
+.password-container {
+  background-color: #fff;
+  border-radius: 10px;
+  border: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1em;
-  background-color: rgb(9, 14, 15);
-  border-radius: 5px;
-  width: 18em;
-  height: 20em;
-  box-shadow: -2px 2px 0 rgba(0, 0, 0, 0.5);
+  flex-direction: row;
+  height: 2em;
+  justify-content:space-between;
+  position: relative;
+  width: 12em;
 }
 
-.password{
-display: flex;
-flex-direction: row;
-justify-content: space-between;
+.password-input{
+  background:transparent;
+  border:0;
+  color:black;
+  padding-left: 0.5em;
+  width: 100%;
 }
 
-#icon{
-  cursor:pointer;
-}
-
-i {
+#icon {
+  color:black;
+  cursor: pointer;
   margin-top: 0.5em;
-  color: #fff
+  position:absolute;
+  right: 0.5em;
 }
-
 
 button {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  text-align: center;
+  background-color: #676768;
   border-radius: 10px;
   box-shadow: -2px 2px 0 rgba(0, 0, 0, 0.5);
-  background-color: rgba(255, 72, 0, 0.5);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  height: 2em;
+  text-align: center;
+  width: 12em;
 }
 
 button:hover {
-  background-color: rgb(255, 72, 0, 1);
+  background-color: #040f0f;
 }

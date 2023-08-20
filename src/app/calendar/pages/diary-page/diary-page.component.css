@@ -1,0 +1,47 @@
+.form-container {
+  display: grid;
+  align-content: start;
+  margin: 1em;
+}
+
+.add-task-container {
+  padding: 1em;
+  width: 100%;
+}
+
+input {
+  margin: 0.1em;
+  border-radius: 5px;
+}
+
+.add_newTasks::placeholder {
+  color: #fff;
+}
+
+button {
+  border-radius: 5px;
+  background-color: #1e1e1eb9;
+  box-shadow: 0.1em 0.1em rgba(0, 0, 0, 0.6);
+}
+
+button:hover {
+  background-color:#1e1e1e;
+}
+
+span{
+  color:red;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+}
+
+.selected-task {
+  position: relative;
+  right: 0;
+  top: 0;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  margin-left: 5em;
+}
