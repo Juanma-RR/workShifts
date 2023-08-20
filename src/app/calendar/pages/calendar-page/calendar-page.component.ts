@@ -212,4 +212,6 @@ export class CalendarPageComponent implements OnInit {
   redirectToDiary() {
     this.router.navigateByUrl('calendar/diary');
   }
+
+  
 }

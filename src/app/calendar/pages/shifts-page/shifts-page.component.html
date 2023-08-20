@@ -3,29 +3,39 @@
     <label class="title">New Shift</label>
     <!--agregar tareas-->
     <div class="">
-      <label class="">Add</label>
       <div class="">
         <div class="input-group">
+          <p>Entry time</p>
           <input
-            class="add_newTime"
-            type="text"
-            placeholder="New shift"
-            [formControl]="newTime"
+            class="add-entry-time"
+            type="time"
+            [formControl]="newEntryHours"
+          />
+          <p>Departure time</p>
+          <input
+            class="add-departure-time"
+            type="time"
+            [formControl]="newDepartureHours"
           />
 
-          <input class="add_newColor"  type="color" [formControl]="newColor" />
+          <input class="add_newColor"  type="color" [formControl]="newColors" />
 
           <button (click)="addNewTimeAndColor()" type="button">
             Add new shift
           </button>
           <span
-            *ngIf="this.newTime.invalid && this.newTime.touched"
+            *ngIf="this.newEntryHours.invalid && this.newEntryHours.touched"
+            class="error"
+            >May introduce a time
+          </span>
+          <span
+            *ngIf="this.newDepartureHours.invalid && this.newDepartureHours.touched"
             class="error"
             >May introduce a time
           </span>
           <br />
           <span
-            *ngIf="this.newColor.invalid && this.newColor.touched"
+            *ngIf="this.newColors.invalid && this.newColors.touched"
             class="error"
             >May choose a color</span
           >
@@ -35,15 +45,18 @@
 
     <!--nuevas tareas-->
 
-    <div class="task-container" formArrayName="time">
+   <div class="task-container" formArrayName="entryHours">
       <!--Mostrar la nueva tarea-->
 
-      <div class="time" *ngFor="let hour of time.controls; let i = index">
-        <input [value]="time.at(i).value" class="task-text" type="text" />
+      <div class="time" *ngFor="let hour of entryTime.controls ; let i = index">
+
+        <input [value]="entryTime.at(i).value" class="task-text" type="time" />
+        <input [value]="departureTime.at(i).value" class="task-text" type="time" />
+
 
         <!--Mostrar la fecha de la tarea-->
 
-        <input class="task-date" type="color" [value]="color.at(i).value" />
+       <input class="task-date" type="color" [value]="color.at(i).value" />
         <button (click)="deleteSavedTime(i)">Delete</button>
       </div>
     </div>

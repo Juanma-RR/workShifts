@@ -8,11 +8,15 @@ import {
   FormsModule,
 } from '@angular/forms';
 
+import { TasksAndDatesObject } from '../../interfaces/TasksAndDatesObject';
+
 import { ValidatorService } from '../../services/validator.service';
 
+
+//prueba de enum
 enum allTasksTypes {
-  dates = 'dates',
   tasks = 'tasks',
+  dates = 'dates',
 }
 
 @Component({
@@ -33,7 +37,7 @@ export class DiaryPageComponent implements OnInit {
   public savedDate = '';
   public savedColors: string = '';
 
-  public tasksAndDatesObject: any = {
+  public tasksAndDatesObject: TasksAndDatesObject = {
     tasks: [],
     dates: [],
     color: [],
@@ -61,11 +65,7 @@ export class DiaryPageComponent implements OnInit {
     const storedData = localStorage.getItem('tasksAndDates');
 
     if (storedData) {
-      const parsedData = JSON.parse(storedData) as {
-        tasks: string[];
-        dates: string[];
-        color: string[];
-      };
+      const parsedData = JSON.parse(storedData) as TasksAndDatesObject;
 
       this.tasksAndDatesObject = parsedData;
 
@@ -84,6 +84,7 @@ export class DiaryPageComponent implements OnInit {
   }
 
   get tasks() {
+    // para el get usamos el enum (allTasksTypes.tasks), sin enum seria 'tasks' siendo esto la propiedad del formgroup 'alltasks'
     return this.allTasks.get(allTasksTypes.tasks) as FormArray;
   }
   get dates() {
