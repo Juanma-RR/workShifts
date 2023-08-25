@@ -1,3 +1,5 @@
+
+<app-modal #modalRef />
 <div class="calendar-container">
   <header class="calendar-header">
     <div id="calendar-prev" (click)="prevMonth()"></div>
@@ -14,24 +16,36 @@
       </li>
 
       <li
+        (click)="modalRef.showDialog(dayBlock)"
         class="monthDate"
         *ngFor="let dayBlock of monthDayBlocks"
         [ngClass]="{ active: dayBlock.highlight, inactive: dayBlock.disabled }"
-      >
-        <div class="data-number">{{ dayBlock.dayValue }}</div>
-        <div
+        [style.background-color]="dayBlock.color"
 
-          class="dot"
-          [style.background-color]="dayBlock.color"
-          (click)="toggleTask(dayBlock)"
-        ></div>
-        <div
-          class="task"
-          *ngIf="dayBlock.showTask"
-          [class.expanded]="dayBlock.expanded"
-          (click)="redirectToDiary()"
-        >
-          {{ dayBlock.task }}
+      >
+
+        <div class="data-number">{{ dayBlock.dayValue }}</div>
+
+        <div class="show-dot" *ngIf="dayBlock.taskList?.length">
+          <div
+            class="dot"
+            *ngFor="let task of dayBlock.taskList"
+            [style.background-color]="task.color"
+            (click)="toggleTask(task); $event.stopPropagation()"
+          ></div>
+          <!--$event.stopPropagation() sirve para impedir que el evento se propague mas allá del elemento donde se hizo click-->
+        </div>
+
+        <div class="task" [class.expanded]="dayBlock.expanded">
+          <ul class="task-list">
+            <li
+              *ngFor="let task of dayBlock.taskList"
+              [ngClass]="{ hidden: !isSelected(task.id) }"
+              (click)="redirectToDiary()"
+            >
+              {{ task.title }}
+            </li>
+          </ul>
         </div>
       </li>
     </ul>

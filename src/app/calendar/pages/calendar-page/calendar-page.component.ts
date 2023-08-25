@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { MonthDayBlocks } from '../../interfaces/MonthDayBlocks';
+import { isSameDate } from 'src/app/shared/utils/isSameDate';
+import { Shift } from '../../interfaces/Shift';
+import { Task } from '../../interfaces/Task';
+
 @Component({
   selector: 'app-calendar-page',
   templateUrl: './calendar-page.component.html',
@@ -9,19 +14,12 @@ import { Router } from '@angular/router';
 export class CalendarPageComponent implements OnInit {
   public days: string[];
   public months: string[];
-  public monthDayBlocks: {
-    dayValue: number;
-    monthValue?: number;
-    yearValue?: number;
-    disabled: boolean;
-    highlight: boolean;
-    task?: string;
-    color?: string;
-    showTask?: boolean;
-    expanded?: boolean;
-  }[];
+  public monthDayBlocks: MonthDayBlocks[];
   public currentMonth: number;
   public currentYear: number;
+  public shifts: Shift[] = [];
+  public taskExpandedId?: string;
+  public expandedTask: string[] = [];
 
   constructor(private router: Router) {
     let date = new Date(); //dia corriente
@@ -47,38 +45,49 @@ export class CalendarPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadFromLocalStorage();
+    this.loadTasksFromLocalStorage();
+    this.loadDayBlocksFromLocalStorage();
   }
 
   printCalendar(date: Date) {
+    this.loadTasksFromLocalStorage(); // Cargar tareas almacenadas
+    this.loadDayBlocksFromLocalStorage();
     this.monthDayBlocks = [];
 
     // año corriente
-    let year = date.getFullYear();
+    const year = date.getFullYear();
 
     //mes corriente
-    let month = date.getMonth();
+    const month = date.getMonth();
 
     // Primer dia del mes (lunes, martes....)
-    let dayone = new Date(year, month, 1).getDay();
+    const dayone = new Date(year, month, 1).getDay();
 
     // Ultima fecha del mes (31,30,28)
-    let lastdate = new Date(year, month + 1, 0).getDate();
+    const lastdate = new Date(year, month + 1, 0).getDate();
 
     // Dia de la ultima fecha del mes (31 fue sabado)
-    let dayend = new Date(year, month, lastdate).getDay();
+    const dayend = new Date(year, month, lastdate).getDay();
 
     // Ultima fecha del anterior mes (es 5 de marzo, el ultimo dia del mes pasado fue 28 de febrero)
-    let monthlastdate = new Date(year, month, 0).getDate();
+    const monthlastdate = new Date(year, month, 0).getDate();
 
     // Añadimos las fechas del mes anterior
     for (let i = monthlastdate - dayone + 1; i <= monthlastdate; i++) {
+      const date = new Date(year, month - 1, i).toISOString();
+
       this.monthDayBlocks.push({
         dayValue: i,
-        monthValue: month -1,
+        monthValue: month - 1,
         yearValue: year,
         disabled: true,
         highlight: false,
+        color: [],
+        expanded: false,
+        showDot: false,
+        showTask: false,
+        taskList: [],
+        date,
       });
     }
 
@@ -92,24 +101,40 @@ export class CalendarPageComponent implements OnInit {
         currentDate.getMonth() === new Date().getMonth() &&
         currentDate.getFullYear() === new Date().getFullYear();
 
+      const date = new Date(year, month, i).toISOString();
+
       this.monthDayBlocks.push({
         dayValue: i,
         monthValue: month,
         yearValue: year,
         disabled: false,
         highlight: isToday,
+        color: [],
+        expanded: false,
+        showDot: false,
+        showTask: false,
+        taskList: [],
+        date,
       });
     }
 
     // Añadimos las primeras fechas del mes siguiente
 
     for (let i = 1; i <= 6 - dayend; i++) {
+      const date = new Date(year, month + 1, i).toISOString();
+
       this.monthDayBlocks.push({
         dayValue: i,
         monthValue: month + 1,
         yearValue: year,
         disabled: true,
         highlight: false,
+        color: [],
+        expanded: false,
+        showDot: false,
+        showTask: false,
+        taskList: [],
+        date,
       });
     }
   }
@@ -123,8 +148,8 @@ export class CalendarPageComponent implements OnInit {
       this.setMonth(this.currentMonth + 1);
     }
     this.printCalendar(new Date(this.currentYear, this.currentMonth));
-    this.loadFromLocalStorage();
-  }
+    this.loadTasksFromLocalStorage(); // Cargar tareas almacenadas
+    this.loadDayBlocksFromLocalStorage();  }
 
   prevMonth(): void {
     if (this.currentMonth <= 0) {
@@ -134,8 +159,8 @@ export class CalendarPageComponent implements OnInit {
       this.setMonth(this.currentMonth - 1);
     }
     this.printCalendar(new Date(this.currentYear, this.currentMonth));
-    this.loadFromLocalStorage();
-  }
+    this.loadTasksFromLocalStorage(); // Cargar tareas almacenadas
+    this.loadDayBlocksFromLocalStorage();  }
 
   setMonth(month: number): void {
     //creamos una nueva fecha
@@ -158,60 +183,83 @@ export class CalendarPageComponent implements OnInit {
     date.setFullYear(this.currentYear);
   }
 
-  loadFromLocalStorage() {
+  loadTasksFromLocalStorage() {
+    //guardamos el localstorage en una constante
     const storedData = localStorage.getItem('tasksAndDates');
-
+    //comprobamos si tenemos datos almacenados
     if (storedData) {
-      const parsedData = JSON.parse(storedData) as {
-        tasks: string[];
-        dates: string[];
-        color: string[];
-      };
+      //si los tenemos: guardamos en parsedData de tipo Task[]
+      const parsedData = JSON.parse(storedData) as Task[];
 
       // Recorrer los tasks almacenados
-      parsedData.tasks.forEach((task, index) => {
-        const taskDate = parsedData.dates[index];
-        const color = parsedData.color[index];
-
-        //separamos el año, mes y día en un array
-        const datePart = taskDate.split('-');
-
-        //convertimos el string en number, en la posicion 0 para sacar el año y hacemos lo mismo con el mes y el día
-        const year = parseInt(datePart[0]);
-        const month = parseInt(datePart[1]) - 1; // Los meses en JavaScript van de 0 a 11 por eso -1
-        const day = parseInt(datePart[2]);
-
+      parsedData.forEach((task) => {
         // Encontrar el dayBlock correspondiente y asignar el task
-        const matchingDayBlock = this.monthDayBlocks.find((dayBlock) => {
-          return (
-            dayBlock.dayValue === day &&
-            dayBlock.monthValue === month &&
-            dayBlock.yearValue === year
-          );
+        this.addTaskToDayBlock(task, task.startDate);
+        this.addTaskToDayBlock(task, task.endDate);
+
+        this.monthDayBlocks.forEach((dayBlock) => {
+          if (dayBlock.taskList && dayBlock.taskList.length > 1)
+            dayBlock.showDot = true;
         });
+      });
+    }
+  }
+
+  loadDayBlocksFromLocalStorage() {
+    const storedDayBlocks = localStorage.getItem('dayBlocks');
+
+    if (storedDayBlocks) {
+      const colorDayBlocks = JSON.parse(storedDayBlocks) as MonthDayBlocks[];
+      colorDayBlocks.forEach((colorDayBlock) => {
+        const matchingDayBlock = this.monthDayBlocks.find((dayBlock) =>
+          isSameDate(dayBlock.date, colorDayBlock.date)
+        );
 
         if (matchingDayBlock) {
-          matchingDayBlock.task = task;
-          // Color almacenado
-          matchingDayBlock.color = color;
-          // Inicialmente ocultar el task
-          matchingDayBlock.showTask = false;
+          matchingDayBlock.color = colorDayBlock.color;
         }
       });
     }
   }
 
-  toggleTask(dayBlock: any): void | boolean {
-    if (dayBlock.task.length < 15)
-      return (dayBlock.showTask = !dayBlock.showTask);
+  addColorToDayBlock(color: string, date: string) {
+    const dayBlockColor = this.monthDayBlocks.find((dayBlock) =>
+      isSameDate(dayBlock.date, date)
+    );
+    if (dayBlockColor) {
+      dayBlockColor.color.push(color);
+      // this.saveToLocalStorage();
+    }
+  }
 
-    dayBlock.expanded = true;
-    dayBlock.showTask = !dayBlock.showTask;
+  addTaskToDayBlock(task: Task, date: string) {
+    const dayBlock = this.monthDayBlocks.find((dayBlock) =>
+      isSameDate(dayBlock.date, date)
+    );
+    dayBlock?.taskList?.push(task);
+  }
+
+  toggleTask(task: Task): void | boolean {
+    if (this.expandedTask.includes(task.id)) {
+      const index = this.expandedTask.findIndex((el) => el === task.id);
+      this.expandedTask.splice(index, 1);
+    } else {
+      this.expandedTask.push(task.id);
+    }
   }
 
   redirectToDiary() {
     this.router.navigateByUrl('calendar/diary');
   }
 
-  
+  isSelected(id: string): boolean {
+    return this.expandedTask.includes(id);
+  }
+
+  matchDayBlockShift(dayBlock: MonthDayBlocks, shift: Shift) {
+    dayBlock.shift = shift;
+  }
+  // saveToLocalStorage() {
+  //   localStorage.setItem('dayBlocks', JSON.stringify(this.monthDayBlocks));
+  // }
 }

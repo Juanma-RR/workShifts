@@ -1,0 +1,6 @@
+<p-dialog #modalRef header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }">
+    <div class="flex py-2 justify-content-center">
+        <p-dropdown appendTo="body" [options]="shifts" [(ngModel)]="selectedShift"  placeholder="Select a shift" optionLabel="comment"></p-dropdown>
+        <p-button icon="pi pi-check" (click)="selectShift(selectedShift)" label="Ok" styleClass="p-button-text"></p-button>
+    </div>
+</p-dialog>
