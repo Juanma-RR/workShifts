@@ -1,53 +1,53 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css'],
+  styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent {
   public myForm: FormGroup = this.fb.group({
     user: ['User', Validators.required],
-    password: ['Password', [Validators.required, Validators.minLength(6)]],
-  });
+    password: ['Password', [Validators.required, Validators.minLength(6)]]
+  })
 
   constructor(private fb: FormBuilder) {}
 
   onSave(): void {}
 
   isValidField(field: string) {
-    return this.myForm.controls[field].errors;
+    return this.myForm.controls[field].errors
   }
 
   getFieldError(field: string): string | null {
-    if (!this.myForm.controls[field]) return null;
-    const errors = this.myForm.controls[field].errors || {};
+    if (!this.myForm.controls[field]) return null
+    const errors = this.myForm.controls[field].errors || {}
     for (const key of Object.keys(errors)) {
       switch (key) {
         case 'required':
-          return 'This field is required';
+          return 'This field is required'
 
         case 'minlength':
-          return `Min ${errors['minlength'].requiredLength} characters.`;
+          return `Min ${errors['minlength'].requiredLength} characters.`
       }
     }
 
-    return null;
+    return null
   }
 
   showPasswordAndIcon(): any {
-    let pwd: any = document.getElementById('pass');
-    let icon: any = document.getElementById('icon');
+    const pwd: any = document.getElementById('pass')
+    const icon: any = document.getElementById('icon')
 
     if (pwd.type === 'password') {
-      pwd.type = 'text';
-      icon.className = 'pi pi-eye-slash';
+      pwd.type = 'text'
+      icon.className = 'pi pi-eye-slash'
     } else {
-      pwd.type = 'password';
-      icon.className = 'pi pi-eye';
+      pwd.type = 'password'
+      icon.className = 'pi pi-eye'
     }
-    return;
+    return
   }
 
   checkPass() {}

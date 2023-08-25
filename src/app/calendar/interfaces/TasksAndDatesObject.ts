@@ -1,5 +1,5 @@
- export interface TasksAndDatesObject {
-  tasks: string[],
-  dates: string[],
-  color: string[],
+export interface TasksAndDatesObject {
+  tasks: string[]
+  dates: string[]
+  color: string[]
 }

@@ -1,18 +1,17 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'
 
-import { DialogModule } from 'primeng/dialog';
-import { DropdownModule } from 'primeng/dropdown';
-import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog'
+import { DropdownModule } from 'primeng/dropdown'
+import { ButtonModule } from 'primeng/button'
 
-import { ModalComponent } from './modal.component';
-import { FormsModule } from '@angular/forms';
-
+import { ModalComponent } from './modal.component'
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [ModalComponent],
 
-  imports: [DialogModule, DropdownModule, ButtonModule, FormsModule, ],
+  imports: [DialogModule, DropdownModule, ButtonModule, FormsModule],
 
-  exports: [ModalComponent],
+  exports: [ModalComponent]
 })
 export class ModalModule {}

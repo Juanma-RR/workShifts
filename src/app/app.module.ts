@@ -1,27 +1,23 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserModule } from '@angular/platform-browser'
+import { NgModule } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
 
+import { PrimeModule } from './prime/prime.module'
 
-import { PrimeModule } from './prime/prime.module';
-
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { MenubarComponent } from './menubar/menubar.component';
-import { RegisterPageComponent } from './register-page/register-page.component';
-import { SharedModule } from './shared/shared.module';
-
-
+import { AppComponent } from './app.component'
+import { AppRoutingModule } from './app-routing.module'
+import { LoginPageComponent } from './login-page/login-page.component'
+import { MenubarComponent } from './menubar/menubar.component'
+import { RegisterPageComponent } from './register-page/register-page.component'
+import { SharedModule } from './shared/shared.module'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     MenubarComponent,
-    RegisterPageComponent,
-
+    RegisterPageComponent
   ],
   imports: [
     AppRoutingModule,
@@ -29,14 +25,11 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     PrimeModule,
     ReactiveFormsModule,
-    SharedModule,
-
+    SharedModule
   ],
 
   providers: [],
 
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-
-
 export class AppModule {}
