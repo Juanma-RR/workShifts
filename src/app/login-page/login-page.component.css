@@ -60,7 +60,7 @@ body {
 }
 
 button {
-  background-color: #676768;
+  background-color: rgba(105, 105, 105, 1);
   border-radius: 10px;
   box-shadow: -2px 2px 0 rgba(0, 0, 0, 0.5);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -70,5 +70,5 @@ button {
 }
 
 button:hover {
-  background-color: #040f0f;
+  background-color: rgba(105, 105, 105, 0.5);
 }

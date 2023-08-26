@@ -80,4 +80,12 @@ export class DiaryPageComponent implements OnInit {
     this.list.removeAt(index)
     this.saveToLocalStorage()
   }
+
+  adjustTextAreaHeight(event: Event) {
+    const textarea = event.target as HTMLTextAreaElement
+    if (textarea) {
+      textarea.style.height = 'auto' // Reinicia la altura
+      textarea.style.height = `${textarea.scrollHeight}px` // Ajusta la altura al contenido
+    }
+  }
 }

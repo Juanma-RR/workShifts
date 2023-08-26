@@ -1,0 +1,60 @@
+.title {
+  font-size: 30px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: 1em;
+}
+
+.add-task-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.textarea-auto {
+  overflow: hidden; /* Para ocultar el desbordamiento de contenido */
+  resize: none; /* Deshabilita la opción de redimensionar */
+}
+
+input,
+textarea {
+  border-radius: 5px;
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.9);
+}
+
+button {
+  background-color: rgba(105, 105, 105, 1);
+  border-radius: 5px;
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.9);
+}
+button:hover {
+  background-color: rgba(105, 105, 105, 0.5);
+}
+
+label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: large;
+  font-style: italic;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  padding: 1em;
+}
+
+.task-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.task {
+  width: 50em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

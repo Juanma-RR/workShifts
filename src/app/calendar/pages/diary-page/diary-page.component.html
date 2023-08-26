@@ -1,19 +1,26 @@
 <form [formGroup]="newForm">
-  <label class="title">Add new task</label>
+  <label class="title">Add new task:</label>
   <!--agregar tareas-->
   <div class="add-task-container">
     <input
       class="add_newTasks"
       type="text"
-      placeholder="Task title"
+      placeholder="Title"
       formControlName="title"
     />
-    <textarea formControlName="description" placeholder="Description" cols="20" rows="5"></textarea>
+    <textarea
+      formControlName="description"
+      placeholder="Description"
+      cols="20"
+      rows="1"
+      class="textarea-auto"
+      (input)="adjustTextAreaHeight($event)"
+    ></textarea>
 
-    <label>Start date </label>
+    <label>Start date: </label>
     <input class="add_newDates" type="date" formControlName="startDate" />
 
-    <label>End date </label>
+    <label>End date: </label>
     <input class="add_newDates" type="date" formControlName="endDate" />
 
     <button (click)="add()" type="button">Add new task</button>

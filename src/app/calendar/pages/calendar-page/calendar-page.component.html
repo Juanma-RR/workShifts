@@ -1,4 +1,3 @@
-
 <app-modal #modalRef />
 <div class="calendar-container">
   <header class="calendar-header">
@@ -21,9 +20,7 @@
         *ngFor="let dayBlock of monthDayBlocks"
         [ngClass]="{ active: dayBlock.highlight, inactive: dayBlock.disabled }"
         [style.background-color]="dayBlock.color"
-
       >
-
         <div class="data-number">{{ dayBlock.dayValue }}</div>
 
         <div class="show-dot" *ngIf="dayBlock.taskList?.length">
@@ -33,8 +30,8 @@
             [style.background-color]="task.color"
             (click)="toggleTask(task); $event.stopPropagation()"
           ></div>
-          <!--$event.stopPropagation() sirve para impedir que el evento se propague mas allá del elemento donde se hizo click-->
         </div>
+        <!--$event.stopPropagation() sirve para impedir que el evento se propague mas allá del elemento donde se hizo click-->
 
         <div class="task" [class.expanded]="dayBlock.expanded">
           <ul class="task-list">

@@ -1,15 +1,15 @@
 <form [formGroup]="newForm">
-  <label class="title">Add new task</label>
+  <label class="title">Add new shift</label>
   <!--agregar tareas-->
   <div class="add-task-container">
-    <label>Entry time </label>
+    <label>Entry time: </label>
     <input
       class="add_newTasks"
       type="time"
       placeholder="Task title"
       formControlName="entryTime"
     />
-    <label>Departure time </label>
+    <label>Departure time: </label>
 
     <input
       class="add_newTasks"
@@ -20,7 +20,7 @@
 
     <input type="text" formControlName="comment" placeholder="Comment" />
 
-    <label>Color</label>
+    <label>Color:</label>
 
     <input class="add_newDates" type="color" formControlName="color" />
 
