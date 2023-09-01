@@ -36,9 +36,13 @@ export class LoginPageComponent {
     return null
   }
 
-  showPasswordAndIcon(): any {
-    const pwd: any = document.getElementById('pass')
-    const icon: any = document.getElementById('icon')
+  showPasswordAndIcon(): void {
+    const pwd: HTMLInputElement | null = document.getElementById(
+      'pass'
+    ) as HTMLInputElement
+    const icon: HTMLInputElement | null = document.getElementById(
+      'icon'
+    ) as HTMLInputElement
 
     if (pwd.type === 'password') {
       pwd.type = 'text'
@@ -49,6 +53,4 @@ export class LoginPageComponent {
     }
     return
   }
-
-  checkPass() {}
 }

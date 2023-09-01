@@ -5,12 +5,14 @@ import { ReactiveFormsModule } from '@angular/forms'
 
 import { PrimeModule } from './prime/prime.module'
 
-import { AppComponent } from './app.component'
 import { AppRoutingModule } from './app-routing.module'
+import { SharedModule } from './shared/shared.module'
+import { ColorPaletteModule } from './shared/color-palette/color-palette.module'
+
+import { AppComponent } from './app.component'
 import { LoginPageComponent } from './login-page/login-page.component'
 import { MenubarComponent } from './menubar/menubar.component'
 import { RegisterPageComponent } from './register-page/register-page.component'
-import { SharedModule } from './shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { SharedModule } from './shared/shared.module'
     BrowserModule,
     PrimeModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    ColorPaletteModule
   ],
 
   providers: [],

@@ -1,29 +1,47 @@
-<div class="flex flex-column">
-  <span>Registro</span>
+<body>
+  <form [formGroup]="newForm">
+    <div class="form-container">
+      <img class="user-icon" src="assets/images/add-user.png" />
 
+      <div class="input-group">
+        <input formControlName="email" type="e-mail" />
+        <label>Email</label>
+      </div>
 
-    <label>Correo electrónico</label>
-    <input type="e-mail"  placeholder="Correo electrónico" />
+      <span *ngIf="newForm.errors?.['email']" class="form-text text-danger">
+        must be a correct e-mail
+      </span>
 
+      <br />
 
+      <div class="input-group">
+        <input formControlName="user" class="user-input" type="text" />
+        <label>User</label>
+      </div>
+      <br />
 
-    <label>Usuario</label>
-    <input type="text"  placeholder="Nombre de usuario" />
+      <div class="input-group">
+        <input formControlName="password" type="password" class="pass" />
+        <label>Password</label>
+      </div>
 
+      <br />
 
+      <div class="input-group">
+        <input formControlName="confirmPassword" type="password" class="pass" />
+        <label>Confirm password</label>
+      </div>
 
-    <label>Contraseña</label>
-    <input type="password" placeholder="Contraseña" />
+      <span *ngIf="newForm.errors?.['notEqual']" class="form-text text-danger">
+        passwords must match
+      </span>
 
-    <label>Repita Contraseña</label>
-    <input type="password" placeholder="Contraseña" />
+      <br />
 
-
-  <button>
-    Login
-  </button>
-
-  <div class="flex justify-content-end mt-5">
-    <a routerLink="/login">¿Ya tienes cuenta?</a>
-  </div>
-</div>
+      <button>Register</button>
+      <div class="">
+        <a routerLink="/login">Login</a>
+      </div>
+    </div>
+  </form>
+</body>

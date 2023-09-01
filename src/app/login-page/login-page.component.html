@@ -1,6 +1,7 @@
 <body>
   <form [formGroup]="myForm">
     <div class="form-container">
+      <img class="user-icon" src="assets/images/user.png">
       <input class="user-input" type="text" formControlName="user" (ngSubmit)="onSave()" />
       <span class="error" *ngIf="isValidField('user')"
         >{{ getFieldError("user") }}
@@ -31,10 +32,10 @@
 
       <br />
       <button (click)="onSave()">Login</button>
+      <div class="acc">
+        <a routerLink="/register">Not account jet?</a>
+      </div>
     </div>
   </form>
 
-  <div class="acc">
-    <a routerLink="/register">Not account jet?</a>
-  </div>
 </body>

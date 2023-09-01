@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core'
 @Injectable({
   providedIn: 'root'
 })
-export class TaskDotGeneratorService {
-  constructor() {}
+export class ColorPaletteService {
+
+
+
+
+  public changeColor(color:ColorPalette) {}
 }

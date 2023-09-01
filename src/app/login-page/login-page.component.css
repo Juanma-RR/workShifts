@@ -8,23 +8,29 @@ body {
 }
 
 .form-container {
-  align-items: center;
+  align-items:center;
   background: linear-gradient(#2d7dd2, #9000b3, #eac435, #8cffda, #f5cce8);
   border-radius: 15px;
-  border-radius: 5px;
   box-shadow: -2px 2px 0 rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  height: 20em;
-  justify-content: center;
-  padding: 1em;
+  height: 25em;
+  justify-content: flex-start;
   width: 18em;
+  padding: 4em;
+}
+
+
+.user-icon {
+  width: 4em;
+  height: 4em;
+  margin-bottom: 2em;
 }
 
 .user-input {
   background-color: #fff;
   border-radius: 10px;
-  border:0;
+  border: 0;
   color: black;
   height: 2em;
   padding-left: 0.5em;
@@ -38,24 +44,24 @@ body {
   display: flex;
   flex-direction: row;
   height: 2em;
-  justify-content:space-between;
+  justify-content: space-between;
   position: relative;
   width: 12em;
 }
 
-.password-input{
-  background:transparent;
-  border:0;
-  color:black;
+.password-input {
+  background: transparent;
+  border: 0;
+  color: black;
   padding-left: 0.5em;
   width: 100%;
 }
 
 #icon {
-  color:black;
+  color: black;
   cursor: pointer;
   margin-top: 0.5em;
-  position:absolute;
+  position: absolute;
   right: 0.5em;
 }
 
@@ -63,12 +69,23 @@ button {
   background-color: rgba(105, 105, 105, 1);
   border-radius: 10px;
   box-shadow: -2px 2px 0 rgba(0, 0, 0, 0.5);
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  height: 2em;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  height: em;
   text-align: center;
   width: 12em;
+  margin-top: 1em;
 }
 
 button:hover {
   background-color: rgba(105, 105, 105, 0.5);
+}
+
+a{
+  border:none;
+  color: black;
+  text-decoration: none;
+}
+
+a:hover{
+  color: grey;
 }

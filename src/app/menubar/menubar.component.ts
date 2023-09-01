@@ -9,6 +9,9 @@ import { MenuItem } from 'primeng/api'
 export class MenubarComponent implements OnInit {
   items: MenuItem[] | undefined
   buttonItems: MenuItem[] | undefined
+  theme: MenuItem[] | null = []
+
+  constructor() {}
 
   ngOnInit() {
     this.items = [
@@ -44,6 +47,24 @@ export class MenubarComponent implements OnInit {
         label: 'Register',
         icon: 'pi pi-fw pi-user-plus',
         routerLink: 'register'
+      }
+    ]
+
+    this.theme = [
+      {
+        icon: 'pi pi-pencil'
+      },
+      {
+        icon: 'pi pi-refresh'
+      },
+      {
+        icon: 'pi pi-trash'
+      },
+      {
+        icon: 'pi pi-upload'
+      },
+      {
+        icon: 'pi pi-external-link'
       }
     ]
   }

@@ -196,8 +196,12 @@ export class CalendarPageComponent implements OnInit {
       // Recorrer los tasks almacenados
       parsedData.forEach((task) => {
         // Encontrar el dayBlock correspondiente y asignar el task
-        this.addTaskToDayBlock(task, task.startDate)
-        this.addTaskToDayBlock(task, task.endDate)
+        if (task.startDate === task.endDate) {
+          this.addTaskToDayBlock(task, task.startDate)
+        } else {
+          this.addTaskToDayBlock(task, task.startDate)
+          this.addTaskToDayBlock(task, task.endDate)
+        }
 
         this.monthDayBlocks.forEach((dayBlock) => {
           if (dayBlock.taskList && dayBlock.taskList.length > 1)

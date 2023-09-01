@@ -6,3 +6,8 @@
 .hidden {
   display: none;
 }
+
+.darkTheme{
+  background: #1e1e1e;
+  color:rgba(255,255,255 0.87);
+}
